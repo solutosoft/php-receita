@@ -1,0 +1,43 @@
+{
+  "name": "solutosoft/php-receita",
+  "description": "Consulta informações da receita federal",
+  "keywords": ["php", "brasil", "brazil", "br", "cnpj", "consulta", "receita"],
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "support": {
+    "issues": "https://gitlab.com/solutosoft/php-receita/issues",
+    "source": "https://gitlab.com/solutosoft/php-receita"
+  },
+  "authors": [
+    {
+      "name": "Leandro Guindani Gehlen",
+      "email": "leandrogehlen@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^6.5",
+    "symfony/css-selector": "^3.4.40",
+    "symfony/dom-crawler": "^3.4.40"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.8.27|~5.7.21|^6.2"
+  },
+  "config": {
+    "sort-packages": true,
+    "process-timeout": 1800,
+    "fxp-asset": {
+      "enabled": false
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Solutosoft\\Receita\\": "src",
+      "Solutosoft\\Receita\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+        "dev-master": "1.0.x-dev"
+    }
+  }
+}
