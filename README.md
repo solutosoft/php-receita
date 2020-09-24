@@ -11,8 +11,8 @@ SDK que fornece integração com a receita federal para consulta de dados do CNP
 
 
 
-Instalação
-----------
+## Instalação
+
 
 É necessário utilizar o [composer](http://getcomposer.org/download/) para realizar a intalação.
 
@@ -29,3 +29,36 @@ ou adicionando
 ```
 
 não seção  `require` do arquivo `composer.json`.
+
+## Como Utilizar
+
+```php
+<?php
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Solutosoft\Receita\Client;
+
+$app->get('/cnpj-captcha', function (Request $request, Response $response) {
+    $client = new Client();
+    $captcha = $client->getCaptcha();      
+    
+    return $response
+        ->withHeader('X-CNPJ-Cookies', http_build_query($client->getCookies())
+        ->withHeader('Content-Length', mb_strlen($captcha, '8bit')); 
+        ->withBody($captcha);
+});
+
+$app->get('/cnpj-info/{cnpj}/{captcha}', function (Request $request, Response $response, array $args) {
+    $cookies = $request->getQueryParam('cookies'),
+
+    parse_str($args['cookies'], $result);
+    $client = new Client(['timeout' => 5]);
+    $info = $client->findByCNPJ($args['cookies'], $args['captcha'], $result);
+    
+    return $response
+        ->withHeader('Content-Type', 'application/json')        
+        ->write(json_encode($info));
+});
+
+$app->run();
+```
