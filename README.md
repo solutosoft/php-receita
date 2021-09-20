@@ -51,7 +51,7 @@ $app->get('/cnpj-captcha', function (Request $request, Response $response) {
 
 // Retorna as informações do CNPJ, porém deve ser enviado os cookies da requisição anterior e o texto do captcha.
 // Exemplo: 
-// http://localhost/18771001000103/abc123?cookies=cookies[ASPSESSIONIDAUBSSQDS]=OEAEGIOBFOGKOLALLCFEEDIL&cookies[sto-id-47873]=FHOHJEKBLLAB
+// http://localhost/18771001000103/abc123?cookies[ASPSESSIONIDAUBSSQDS]=OEAEGIOBFOGKOLALLCFEEDIL&cookies[sto-id-47873]=FHOHJEKBLLAB
 
 $app->get('/cnpj-info/{cnpj}/{captcha}', function (Request $request, Response $response, array $args) {
     $cookies = $request->getQueryParam('cookies'),
